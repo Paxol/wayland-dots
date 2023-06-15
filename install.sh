@@ -12,6 +12,14 @@ green='\033[0;32m'
 no_color='\033[0m'
 date=$(date +%s)
 
+config_dirs=()
+for dir in config/*/; do
+    dirname=$(basename $dir)
+    config_dirs+=($dirname)
+done
+
+mkdir -p "$config_directory"
+
 sudo pacman --noconfirm --needed -Sy dialog
 
 system_update(){
@@ -57,7 +65,17 @@ copy_fonts(){
     sudo cp -r ./fonts/* "$fonts_directory"
     fc-cache -fv
 }
+backup_config(){
+    echo -e "${green}[*] Creating backup of existing configs.${no_color}"
 
+    for dir in ${config_dirs[@]}; do
+        [ -d "$config_directory"/"$dir" ] && mv "$config_directory"/"$dir" "$config_directory"/"$dir"_$date && echo "$dir configs detected, backing up."
+    done
+}
+copy_config(){
+    echo -e "${green}[*] Copying configs to $config_directory.${no_color}"
+    cp -r ./config/* "$config_directory"
+}
 cmd=(dialog --clear --separate-output --checklist "Select (with space) what script should do.\\nChecked options are required for proper installation, do not uncheck them if you do not know what you are doing." 26 86 16)
 options=(1 "System update" on
          2 "Install aur helper" on
@@ -66,7 +84,9 @@ options=(1 "System update" on
          5 "Install emoji fonts" off
          6 "Install oh my zsh" off
          7 "Set zsh as default shell" on
-         8 "Copy fonts" off)
+         8 "Copy fonts" off
+         9 "Backup config" on
+         10 "Copy config" on)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
 clear
@@ -82,5 +102,7 @@ do
         6) install_oh_my_zsh;;
         7) set_zsh_shell;;
         8) copy_fonts;;
+        9) backup_config;;
+        10) copy_config;;
     esac
 done
