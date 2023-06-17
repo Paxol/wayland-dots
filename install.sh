@@ -40,7 +40,7 @@ install_aur_helper(){
 }
 install_pkgs(){
     echo -e "${green}[*] Installing packages with pacman.${no_color}"
-    sudo pacman -S --noconfirm --needed zsh hyprland kitty rofi polkit-kde-agent xdg-desktop-portal-hyprland qt5-wayland qt6-wayland cliphist swayidle dunst btop rofi-emoji rofi-calc ttf-font-awesome brightnessctl ttf-jetbrains-mono
+    sudo pacman -S --noconfirm --needed zsh hyprland kitty rofi polkit-kde-agent xdg-desktop-portal-hyprland qt5-wayland qt6-wayland cliphist swayidle dunst btop rofi-emoji rofi-calc ttf-font-awesome brightnessctl ttf-jetbrains-mono kvantum-qt5
 }
 install_aur_pkgs(){
     echo -e "${green}[*] Installing packages with yay.${no_color}"
