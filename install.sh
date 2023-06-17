@@ -40,15 +40,15 @@ install_aur_helper(){
 }
 install_pkgs(){
     echo -e "${green}[*] Installing packages with pacman.${no_color}"
-    sudo pacman -S --noconfirm --needed zsh hyprland kitty rofi polkit-kde-agent xdg-desktop-portal-hyprland qt5-wayland qt6-wayland cliphist swayidle dunst btop rofi-emoji rofi-calc ttf-font-awesome brightnessctl ttf-jetbrains-mono kvantum-qt5
+    sudo pacman -S --noconfirm --needed zsh hyprland kitty rofi polkit-kde-agent xdg-desktop-portal-hyprland qt5-wayland qt6-wayland swayidle dunst btop rofi-emoji rofi-calc ttf-font-awesome brightnessctl ttf-jetbrains-mono kvantum-qt5 wl-clipboard
 }
 install_aur_pkgs(){
     echo -e "${green}[*] Installing packages with yay.${no_color}"
-    yay -S --noconfirm --needed waybar-hyprland-git swww greetd-tuigreet xwaylandvideobridge-cursor-mode-2-git hyprpicker visual-studio-code-bin wlogout gtklock sddm-git python-requests rofi-wifi-menu-git pw-volume
+    yay -S --noconfirm --needed waybar-hyprland-git swww greetd-tuigreet xwaylandvideobridge-cursor-mode-2-git hyprpicker visual-studio-code-bin wlogout gtklock sddm-git python-requests rofi-wifi-menu-git pw-volume clipman
 }
 install_additional_pkgs(){
     yay -S --noconfirm --needed visual-studio-code-bin npm gnome-keyring brave-bin
-    npm install -g pnpm
+    sudo npm install -g pnpm
 }
 install_emoji_fonts(){
     echo -e "${green}[*] Installing emoji fonts with yay.${no_color}"
