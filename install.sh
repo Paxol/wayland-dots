@@ -46,6 +46,10 @@ install_aur_pkgs(){
     echo -e "${green}[*] Installing packages with yay.${no_color}"
     yay -S --noconfirm --needed waybar-hyprland-git swww greetd-tuigreet xwaylandvideobridge-cursor-mode-2-git hyprpicker visual-studio-code-bin wlogout gtklock sddm-git python-requests rofi-wifi-menu-git pw-volume
 }
+install_additional_pkgs(){
+    yay -S --noconfirm --needed visual-studio-code-bin npm gnome-keyring brave-bin
+    npm install -g pnpm
+}
 install_emoji_fonts(){
     echo -e "${green}[*] Installing emoji fonts with yay.${no_color}"
     yay -S --noconfirm --needed noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra ttf-whatsapp-emoji
@@ -81,12 +85,13 @@ options=(1 "System update" on
          2 "Install aur helper" on
          3 "Install basic packages" on
          4 "Install basic packages (aur)" on
-         5 "Install emoji fonts" off
-         6 "Install oh my zsh" off
-         7 "Set zsh as default shell" on
-         8 "Copy fonts" off
-         9 "Backup config" on
-         10 "Copy config" on)
+         5 "Install additional packages" on
+         6 "Install emoji fonts" off
+         7 "Install oh my zsh" off
+         8 "Set zsh as default shell" on
+         9 "Copy fonts" off
+         10 "Backup config" on
+         11 "Copy config" on)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
 clear
@@ -98,11 +103,12 @@ do
         2) install_aur_helper;;
         3) install_pkgs;;
         4) install_aur_pkgs;;
-        5) install_emoji_fonts;;
-        6) install_oh_my_zsh;;
-        7) set_zsh_shell;;
-        8) copy_fonts;;
-        9) backup_config;;
-        10) copy_config;;
+        5) install_additional_pkgs;;
+        6) install_emoji_fonts;;
+        7) install_oh_my_zsh;;
+        8) set_zsh_shell;;
+        9) copy_fonts;;
+        10) backup_config;;
+        11) copy_config;;
     esac
 done
